@@ -1,4 +1,4 @@
-# YouTube block hindi videos
+# Chrome extension to block block hindi yt videos
 The extension determines if Hindi is spoken in a video through YouTube's caption track metadata (not the actual audio analysis).
 
 API:
