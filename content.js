@@ -73,11 +73,19 @@ async function checkVideoLanguage(videoId) {
 // Video Processing
 // ======================
 async function processVideoElements() {
-  const videoElements = document.querySelectorAll('ytd-video-renderer, ytd-compact-video-renderer');
+  const videoElements = document.querySelectorAll(`
+    ytd-video-renderer, 
+    ytd-compact-video-renderer,
+    ytd-reel-item-renderer,
+    ytd-rich-item-renderer
+  `);
   
   // Process videos sequentially to maintain throttling
   for (const element of videoElements) {
-    const videoId = element.querySelector('a#thumbnail')?.href?.match(/v=([^&]+)/)?.[1];
+    const videoId = 
+      element.querySelector('a#thumbnail')?.href?.match(/v=([^&]+)/)?.[1] || 
+      element.querySelector('a[href^="/shorts/"]')?.href?.match(/\/shorts\/([^/?]+)/)?.[1];
+
     if (!videoId) continue;
     
     const isHindi = await checkVideoLanguage(videoId);
