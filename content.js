@@ -84,7 +84,9 @@ async function processVideoElements() {
   for (const element of videoElements) {
     const videoId = 
       element.querySelector('a#thumbnail')?.href?.match(/v=([^&]+)/)?.[1] || 
-      element.querySelector('a[href^="/shorts/"]')?.href?.match(/\/shorts\/([^/?]+)/)?.[1];
+      element.querySelector('a[href^="/shorts/"]')?.href?.match(/\/shorts\/([^/?]+)/)?.[1] ||
+      element.querySelector('a[href*="m.youtube.com/watch"]')?.href?.match(/v=([^&]+)/)?.[1] ||
+      element.querySelector('a[href*="m.youtube.com/shorts"]')?.href?.match(/\/shorts\/([^/?]+)/)?.[1];
 
     if (!videoId) continue;
     
